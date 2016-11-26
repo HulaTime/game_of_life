@@ -5,7 +5,7 @@ describe World do
   GRID_SIZE = 3
 
   subject(:world) { described_class.new(GRID_SIZE, GRID_SIZE, cell_obj) }
-  let(:cell_obj) { double :cell_obj }
+  let(:cell_obj) { double :cell_obj, alive?: false }
 
   it { is_expected.to respond_to(:row_num, :col_num, :grid) }
 

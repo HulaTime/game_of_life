@@ -2,16 +2,23 @@ require 'game'
 
 describe Game do
 
-	subject(:game) { described_class.new(world, cell_obj) }
+	subject(:game) { described_class.new(world, seeds) }
 
-	let(:world) { double :world }
-	let(:cell_obj) { double :cell_obj }
+	let(:world) { World.new(3, 3, Cell.new) }
+	let(:seeds) { [[1, 2], [2, 2]] }
 
-	it { is_expected.to respond_to(:world, :cell_obj) }
+	it { is_expected.to respond_to(:world, :seeds) }
 
-	it 'Initialized with a world and cell object to populate the world' do
+	it 'Initialized with a world and seed to populate the world' do
 		expect(game.world).to eq world
-		expect(game.cell_obj).to eq cell_obj
+		expect(game.seeds).to eq seeds
+	end
+
+	it 'Seeds the world correctly' do
+		expect(game.world.grid[0][1]).to be_alive
+		expect(game.world.grid[1][2]).to be_alive
+		expect(game.world.grid[0][2]).to be_alive
+		expect(game.world.grid[1][2]).to be_alive
 	end
 
 	context 'Rules:' do
