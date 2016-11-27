@@ -5,7 +5,11 @@ class World
   def initialize(rows, columns, cell_obj = Cell.new)
     @row_num = rows
     @col_num = columns
-    @grid = [Array.new(row_num, cell_obj), Array.new(col_num, cell_obj)]
+    @grid = Array.new(col_num) do
+    					Array.new(row_num) do
+    						cell_obj
+    					end
+    				end
   end
 
 end

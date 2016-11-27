@@ -18,12 +18,19 @@ describe World do
     it 'Generates 2D array with supplied no. of columns and rows' do
       expect(world.grid.is_a?(Array)).to be true
       expect(world.grid[0].length).to eq GRID_SIZE
-      expect(world.grid[1].length).to eq GRID_SIZE
+      expect(world.grid.length).to eq GRID_SIZE
     end
 
     it 'Cells should be objects passed as arguments at initialization' do
-    	expect(world.grid[0][1]).not_to eq nil
-    	expect(world.grid[1][0]).to eq cell_obj
+    	world.grid.each do |row|
+        row.each do |cell|
+          expect(cell).to eq cell_obj
+        end
+      end
     end
+  end
+
+  it 'Can count the neighbours of each cell on the grid' do
+    world.count_neighbours([])
   end
 end

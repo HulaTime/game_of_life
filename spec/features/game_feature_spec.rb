@@ -15,10 +15,8 @@ describe Game do
 	end
 
 	it 'Seeds the world correctly' do
-		expect(game.world.grid[0][1]).to be_alive
 		expect(game.world.grid[1][2]).to be_alive
-		expect(game.world.grid[0][2]).to be_alive
-		expect(game.world.grid[1][2]).to be_alive
+		expect(game.world.grid[2][2]).to be_alive
 	end
 
 	context 'Rules:' do

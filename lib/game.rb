@@ -9,9 +9,8 @@ class Game
 		@world = world
 		@seeds = seeds
 
-		@seeds.each do |seed|
-			@world.grid[0][seed[0]].set_status('alive')
-			@world.grid[1][seed[1]].set_status('alive')
+		seeds.each do |seed|
+			@world.grid[seed[0]][seed[1]].set_status('alive')
 		end
 	end
 
