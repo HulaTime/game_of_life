@@ -19,7 +19,8 @@ class World
  		end
   end
 
-  def count_cell_neighbours(cell)
+  def count_cell_neighbours(cell_location)
+  	x, y = cell_location[0], cell_location[1]
   end
 
 end
