@@ -7,10 +7,22 @@ describe World do
   subject(:world) { described_class.new(GRID_SIZE, GRID_SIZE, cell_obj) }
   let(:cell_obj) { double :cell_obj, alive?: false }
   let(:live_cell) { double :cell_obj, alive?: true }
-  let(:seeded_grid) {[
-        [cell_obj, cell_obj, live_cell],
+  let(:north_grid) {[
+        [cell_obj, cell_obj, cell_obj],
         [cell_obj, live_cell, cell_obj],
         [cell_obj, live_cell, cell_obj]]}
+  let(:south_grid) {[
+        [cell_obj, live_cell, cell_obj],
+        [cell_obj, live_cell, cell_obj],
+        [cell_obj, cell_obj, cell_obj]]}
+  let(:east_grid) {[
+        [cell_obj, cell_obj, cell_obj],
+        [cell_obj, live_cell, live_cell],
+        [cell_obj, cell_obj, cell_obj]]}
+  let(:west_grid) {[
+        [cell_obj, cell_obj, cell_obj],
+        [live_cell, live_cell, cell_obj],
+        [cell_obj, cell_obj, cell_obj]]}
 
   it { is_expected.to respond_to(:row_num, :col_num, :grid) }
 
@@ -41,20 +53,35 @@ describe World do
         end
       end
     end
-  end
-
-  context 'Seeded world' do
-    subject(:seeded_world) { described_class.new(GRID_SIZE, GRID_SIZE) }
 
     it 'Can be seeded with provided co-ordinates' do
       allow(cell_obj).to receive(:set_status).with('alive')
       world.seed([[1, 0], [1, 1], [1, 2]])
       expect(cell_obj).to have_received(:set_status).exactly(3).times
+    end    
+  end
+
+  context 'Counting live neighbours' do
+    subject(:seeded_world) { described_class.new(GRID_SIZE, GRID_SIZE) }
+
+    it 'North' do
+      allow(seeded_world).to receive(:grid).and_return(north_grid)
+      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
     end
 
-    it 'Can count the neighbours of each cell on the grid' do
-      allow(seeded_world).to receive(:grid).and_return(seeded_grid)
-      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 2
+    it 'South' do
+      allow(seeded_world).to receive(:grid).and_return(south_grid)
+      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+    end
+
+    it 'East' do
+      allow(seeded_world).to receive(:grid).and_return(east_grid)
+      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+    end
+
+    it 'West' do
+      allow(seeded_world).to receive(:grid).and_return(west_grid)
+      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
     end
   end
 end

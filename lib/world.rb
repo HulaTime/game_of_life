@@ -20,21 +20,23 @@ class World
   end
 
   def count_cell_neighbours(cell_location)
-  	x, y = cell_location[0], cell_location[1]
+  	neighbours = 0
+  	neighbours += num_of_live_cells_north_or_south(cell_location)
+  	neighbours += num_of_live_cells_east_or_west(cell_location)
   end
 
   private
 
-  def live_cell_north?
+  def num_of_live_cells_north_or_south(cl)
+		grid[cl[1] + 1][cl[0]].alive? ? north = 1 : north = 0
+  	grid[cl[1] - 1][cl[0]].alive? ? south = 1 : south = 0
+  	north + south
   end
 
-  def live_cell_south?
-  end
-
-  def live_cell_east?
-  end
-
-  def live_cell_west?
+  def num_of_live_cells_east_or_west(cl)
+		grid[cl[1]][cl[0] + 1].alive? ? east = 1 : east = 0
+  	grid[cl[1]][cl[0] - 1].alive? ? west = 1 : west = 0
+  	east + west
   end
 
 end
