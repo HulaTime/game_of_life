@@ -12,4 +12,14 @@ class World
     				end
   end
 
+  def seed(arr)
+ 		arr.each do |coord|
+ 			x, y = coord[0], coord[1]
+ 			grid[y][x].set_status('alive')
+ 		end
+  end
+
+  def count_cell_neighbours(cell)
+  end
+
 end
