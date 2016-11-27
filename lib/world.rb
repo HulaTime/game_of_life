@@ -23,4 +23,18 @@ class World
   	x, y = cell_location[0], cell_location[1]
   end
 
+  private
+
+  def live_cell_north?
+  end
+
+  def live_cell_south?
+  end
+
+  def live_cell_east?
+  end
+
+  def live_cell_west?
+  end
+
 end

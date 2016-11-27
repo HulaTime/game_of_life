@@ -8,7 +8,7 @@ describe World do
   let(:cell_obj) { double :cell_obj, alive?: false }
   let(:live_cell) { double :cell_obj, alive?: true }
   let(:seeded_grid) {[
-        [cell_obj, live_cell, cell_obj],
+        [cell_obj, cell_obj, live_cell],
         [cell_obj, live_cell, cell_obj],
         [cell_obj, live_cell, cell_obj]]}
 
