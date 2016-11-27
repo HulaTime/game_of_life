@@ -7,6 +7,7 @@ describe World do
   subject(:world) { described_class.new(GRID_SIZE, GRID_SIZE, cell_obj) }
   let(:cell_obj) { double :cell_obj, alive?: false }
   let(:live_cell) { double :cell_obj, alive?: true }
+  
   let(:north_grid) {[
         [cell_obj, cell_obj, cell_obj],
         [cell_obj, live_cell, cell_obj],
@@ -23,6 +24,30 @@ describe World do
         [cell_obj, cell_obj, cell_obj],
         [live_cell, live_cell, cell_obj],
         [cell_obj, cell_obj, cell_obj]]}
+  let(:ne_grid) {[
+        [cell_obj, cell_obj, cell_obj],
+        [cell_obj, live_cell, cell_obj],
+        [cell_obj, cell_obj, live_cell]]}
+  let(:se_grid) {[
+        [cell_obj, cell_obj, live_cell],
+        [cell_obj, live_cell, cell_obj],
+        [cell_obj, cell_obj, cell_obj]]}
+  let(:nw_grid) {[
+        [cell_obj, cell_obj, cell_obj],
+        [cell_obj, live_cell, cell_obj],
+        [live_cell, cell_obj, cell_obj]]}
+  let(:sw_grid) {[
+        [live_cell, cell_obj, cell_obj],
+        [cell_obj, live_cell, cell_obj],
+        [cell_obj, cell_obj, cell_obj]]}
+  let(:nsew_grid) {[
+        [cell_obj, live_cell, cell_obj],
+        [live_cell, live_cell, live_cell],
+        [cell_obj, live_cell, cell_obj]]}
+  let(:diagonals_grid) {[
+        [live_cell, cell_obj, live_cell],
+        [cell_obj, live_cell, cell_obj],
+        [live_cell, cell_obj, live_cell]]}
 
   it { is_expected.to respond_to(:row_num, :col_num, :grid) }
 
@@ -64,24 +89,42 @@ describe World do
   context 'Counting live neighbours' do
     subject(:seeded_world) { described_class.new(GRID_SIZE, GRID_SIZE) }
 
-    it 'North' do
+    it 'North and North-East' do
       allow(seeded_world).to receive(:grid).and_return(north_grid)
       expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      allow(seeded_world).to receive(:grid).and_return(ne_grid)
+      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
     end
 
-    it 'South' do
+    it 'South and South-West' do
       allow(seeded_world).to receive(:grid).and_return(south_grid)
       expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      allow(seeded_world).to receive(:grid).and_return(sw_grid)
+      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
     end
 
-    it 'East' do
+    it 'East and South-East' do
       allow(seeded_world).to receive(:grid).and_return(east_grid)
       expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      allow(seeded_world).to receive(:grid).and_return(se_grid)
+      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
     end
 
-    it 'West' do
+    it 'West and North-West' do
       allow(seeded_world).to receive(:grid).and_return(west_grid)
       expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      allow(seeded_world).to receive(:grid).and_return(nw_grid)
+      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+    end
+
+    it 'North, South, East and West' do
+      allow(seeded_world).to receive(:grid).and_return(nsew_grid)
+      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 4
+    end
+
+    it 'NE, SE, SW, NW' do
+      allow(seeded_world).to receive(:grid).and_return(nsew_grid)
+      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 4
     end
   end
 end
