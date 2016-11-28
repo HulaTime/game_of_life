@@ -91,40 +91,45 @@ describe World do
 
     it 'North and North-East' do
       allow(seeded_world).to receive(:grid).and_return(north_grid)
-      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      expect(seeded_world.cell_neighbours([1, 1])).to eq 1
       allow(seeded_world).to receive(:grid).and_return(ne_grid)
-      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      expect(seeded_world.cell_neighbours([1, 1])).to eq 1
     end
 
     it 'South and South-West' do
       allow(seeded_world).to receive(:grid).and_return(south_grid)
-      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      expect(seeded_world.cell_neighbours([1, 1])).to eq 1
       allow(seeded_world).to receive(:grid).and_return(sw_grid)
-      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      expect(seeded_world.cell_neighbours([1, 1])).to eq 1
     end
 
     it 'East and South-East' do
       allow(seeded_world).to receive(:grid).and_return(east_grid)
-      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      expect(seeded_world.cell_neighbours([1, 1])).to eq 1
       allow(seeded_world).to receive(:grid).and_return(se_grid)
-      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      expect(seeded_world.cell_neighbours([1, 1])).to eq 1
     end
 
     it 'West and North-West' do
       allow(seeded_world).to receive(:grid).and_return(west_grid)
-      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      expect(seeded_world.cell_neighbours([1, 1])).to eq 1
       allow(seeded_world).to receive(:grid).and_return(nw_grid)
-      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 1
+      expect(seeded_world.cell_neighbours([1, 1])).to eq 1
     end
 
     it 'North, South, East and West' do
       allow(seeded_world).to receive(:grid).and_return(nsew_grid)
-      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 4
+      expect(seeded_world.cell_neighbours([1, 1])).to eq 4
     end
 
     it 'NE, SE, SW, NW' do
+      allow(seeded_world).to receive(:grid).and_return(diagonals_grid)
+      expect(seeded_world.cell_neighbours([1, 1])).to eq 4
+    end
+
+    it 'Cells outside boudaries are not counted' do
       allow(seeded_world).to receive(:grid).and_return(nsew_grid)
-      expect(seeded_world.count_cell_neighbours([1, 1])).to eq 4
+      expect(seeded_world.cell_neighbours([2,1])).to eq 1
     end
   end
 end

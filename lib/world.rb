@@ -19,7 +19,7 @@ class World
  		end
   end
 
-  def count_cell_neighbours(cell_location)
+  def cell_neighbours(cell_location)
   	neighbours = 0
   	neighbours += num_of_live_cells_north_south_east_or_west(cell_location)
   	neighbours += num_of_live_cells_on_diagonals(cell_location)

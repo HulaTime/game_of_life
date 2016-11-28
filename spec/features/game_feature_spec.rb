@@ -22,6 +22,10 @@ describe Game do
 	context 'Rules:' do
 		xcontext 'Rule 1:' do
 			it 'Live cells with less than 2 live neighbours dies' do
+				game.world.seed(seeds)
+				game.tick!
+				expect(game.world.grid[2][1]).not_to be_alive
+				expect(game.world.grid[2][2]).not_to be_alive
 			end
 		end
 		xcontext 'Rule 2:' do

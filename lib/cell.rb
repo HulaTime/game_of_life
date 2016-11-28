@@ -1,6 +1,6 @@
 class Cell
 
-  attr_reader :x, :y
+  attr_accessor :x, :y
 
   def initialize(x = 0, y = 0)
     @alive = false
