@@ -1,20 +1,23 @@
 class Cell
 
-  attr_accessor :x, :y
+  attr_reader :x, :y, :alive
 
-  def initialize(x = 0, y = 0)
+  def initialize
     @alive = false
-    @x = x
-    @y = y
+    @x = nil
+    @y = nil
   end
 
-  def alive?
-  	@alive
+  def revive
+  	@alive = true
   end
 
-  def set_status(arg)
-  	@alive = true if arg == 'alive'
-  	@alive = false if arg == 'dead'
+  def kill
+    @alive = false
+  end
+
+  def set(x, y)
+    @x, @y = x, y
   end
 
 end

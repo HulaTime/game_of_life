@@ -4,20 +4,6 @@ describe Game do
 
 	subject(:game) { described_class.new(world, seeds) }
 
-	let(:world) { World.new(3, 3, Cell.new) }
-	let(:seeds) { [[1, 2], [2, 2]] }
-
-	it { is_expected.to respond_to(:world, :seeds) }
-
-	it 'Initialized with a world and seed to populate the world' do
-		expect(game.world).to eq world
-		expect(game.seeds).to eq seeds
-	end
-
-	it 'Seeds the world correctly' do
-		expect(game.world.grid[1][2]).to be_alive
-		expect(game.world.grid[2][2]).to be_alive
-	end
 
 	context 'Rules:' do
 		xcontext 'Rule 1:' do
